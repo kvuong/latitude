@@ -55,8 +55,8 @@ public class StockPriceService {
             throw new NumberFormatException("Stock prices file contains invalid input. Please ensure each stock price "
                     + "is on a separate line and is numeric.");
         } catch (Exception exception) {
-            throw new Exception(String.format("Unable to load stock prices from file \"%s\". Please ensure the file and "
-                    + "this application are in the same directory.", inputFilePath.toAbsolutePath().normalize()));
+            throw new Exception(String.format("Unable to load stock prices from file \"%s\".",
+                    inputFilePath.toAbsolutePath().normalize()));
         } finally {
             if (stream != null) {
                 stream.close();
