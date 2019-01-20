@@ -51,6 +51,9 @@ public class StockPriceService {
         try {
             stream = Files.lines(inputFilePath);
             stream.forEach(stockPrice -> prices.add(new BigDecimal(stockPrice)));
+        } catch (NumberFormatException numberFormatException) {
+            throw new NumberFormatException("Stock prices file contains invalid input. Please ensure each stock price "
+                    + "is on a separate line and is numeric.");
         } catch (Exception exception) {
             throw new Exception(String.format("Unable to load stock prices from file \"%s\". Please ensure the file and "
                     + "this application are in the same directory.", inputFilePath.toAbsolutePath().normalize()));

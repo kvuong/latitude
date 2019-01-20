@@ -13,6 +13,7 @@ import static org.junit.Assert.assertEquals;
 public class StockPriceServiceTest {
 
     private static final String TEST_DATA_FILE = "full_test_data.csv";
+    private static final String INVALID_DATA_FILE = "invalid_test_data.csv";
     private static final BigDecimal EXPECTED_MAX_PROFIT = new BigDecimal("8.97");
 
     @Test
@@ -20,5 +21,11 @@ public class StockPriceServiceTest {
         Path testFilePath = Paths.get(ClassLoader.getSystemResource(TEST_DATA_FILE).toURI());
         List<BigDecimal> stockPrices = StockPriceService.getStockPrices(testFilePath.toAbsolutePath().toString());
         assertEquals(EXPECTED_MAX_PROFIT, StockPriceService.getMaxProfit(stockPrices));
+    }
+
+    @Test(expected = NumberFormatException.class)
+    public void invalidInputInTestFile() throws Exception {
+        Path testFilePath = Paths.get(ClassLoader.getSystemResource(INVALID_DATA_FILE).toURI());
+        List<BigDecimal> stockPrices = StockPriceService.getStockPrices(testFilePath.toAbsolutePath().toString());
     }
 }
